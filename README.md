@@ -24,6 +24,33 @@ Python3 уже должен быть установлен. Затем испол
 Переходим к файлу main.py и нажимаем на кнопку запуска. Программа должа вывести
 общее количество пропусков и сколько существует активных пропусков 
 
+```python
+import os
+from tkinter.font import names
+
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+django.setup()
+
+from datacenter.models import Passcard
+
+
+def print_active_key():
+    active_passcards = Passcard.objects.filter(is_active=True)
+    return active_passcards.count()
+
+def main():
+    key = print_active_key()
+
+    print(f'Количество активных пропусков: {key}')
+    print('Количество пропусков:', Passcard.objects.count())
+
+if __name__ == '__main__':
+    main()
+```
+
+
 1. Количество активных пропусков: 89
 2. Количество пропусков: 100
 
@@ -59,6 +86,7 @@ USE_TZ = True
 ## Цели проекта
 
 Код написан в образовательных целях Для онлайн-курса для веб-разработчиков dvmn.org
+
 
 
 
